@@ -61,7 +61,11 @@ if __name__ == "__main__":
 
         repeat = input("Do you want to convert again? Type 'y' or 'n'\n")
 
+        while repeat.lower() not in ("y", "n"):
+            print("Invalid input. Please enter 'y' or 'no.")
+            repeat = input("Do you want to convert again? Type 'y' or 'n'\n")
+
         # Stop program when user types 'n'
-        if repeat == "n":
+        if repeat.lower() == "n":
             keep_going = False
             print("Goodbye!")
