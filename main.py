@@ -16,14 +16,26 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '(':'-.--.', ')':'-.--.-'}
 # fmt: on
 
+keep_going = True
 
-def handle_user_input(input):
+
+def convert_to_morse_code(input):
+    """
+    Looks at users input and converts all characters it can to morse code.
+
+    Args:
+        input (str): The input we receive from the user
+
+    Returns:
+        str: Returns the converted input as more code string
+    """
     result = ""
     for character in input:
         character = character.capitalize()
         if character != " " and character in MORSE_CODE_DICT:
             morse_char = MORSE_CODE_DICT[character]
             result += morse_char + " "
+        # Adds extra space between words
         elif character == " ":
             result += " "
         else:
@@ -32,13 +44,14 @@ def handle_user_input(input):
 
 
 if __name__ == "__main__":
-    while True:
+    while keep_going:
         unused_characters = set()
 
         user_input = input("What word or sentence do you want to convert? ")
 
-        final_result = handle_user_input(user_input)
+        final_result = convert_to_morse_code(user_input)
 
+        # Show user the results
         print(f"Your word or sentence in morse code is as follows: {final_result}")
         if len(unused_characters) > 0:
             print(
@@ -48,6 +61,7 @@ if __name__ == "__main__":
 
         repeat = input("Do you want to convert again? Type 'y' or 'n'\n")
 
+        # Stop program when user types 'n'
         if repeat == "n":
+            keep_going = False
             print("Goodbye!")
-            break
